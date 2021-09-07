@@ -8,7 +8,7 @@ message(STATUS "SEAL_PREBUILT: ${SEAL_PREBUILT}")
 
 if (SEAL_PREBUILT) # Skip download from gitlab
   if (ENABLE_INTEL_HEXL)
-    find_package(HEXL 1.1.0 HINTS ${INTEL_HEXL_HINT_DIR} REQUIRED)
+    find_package(HEXL HINTS ${INTEL_HEXL_HINT_DIR} REQUIRED)
   endif()
   find_package(SEAL 3.6
     HINTS ${SEAL_HINT_DIR}
@@ -21,7 +21,8 @@ else()
   set(SEAL_REPO_URL https://github.com/microsoft/SEAL.git)
   set(SEAL_GIT_TAG v3.6.5)
 
-  set(SEAL_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fvisibility=hidden -fvisibility-inlines-hidden")
+  # TODO: Find where there is a conflict with fvisiblity
+  #set(SEAL_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fvisibility=hidden -fvisibility-inlines-hidden")
 
   set(SEAL_SHARED_LIB OFF) # Set to ON/OFF to toggle shared build
 
@@ -33,7 +34,7 @@ else()
       PREFIX ${SEAL_PREFIX}
       INSTALL_DIR ${SEAL_PREFIX}
       CMAKE_ARGS ${BENCHMARK_FORWARD_CMAKE_ARGS}
-        -DCMAKE_CXX_FLAGS=${SEAL_CXX_FLAGS}
+        -DCMAKE_CXX_FLAGS=${CMAKE_CXX_FLAGS}
         -DCMAKE_INSTALL_PREFIX=${SEAL_PREFIX}
         -DSEAL_USE_CXX17=ON
         -DCMAKE_INSTALL_LIBDIR=${SEAL_PREFIX}/lib
