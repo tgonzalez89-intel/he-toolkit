@@ -18,8 +18,8 @@ if (SEAL_PREBUILT) # Skip download from gitlab
 else()
   set(SEAL_PREFIX ${CMAKE_CURRENT_BINARY_DIR}/ext_seal)
   set(SEAL_SRC_DIR ${SEAL_PREFIX}/src/ext_seal/)
-  set(SEAL_REPO_URL https://github.com/microsoft/SEAL.git)
-  set(SEAL_GIT_TAG v3.7.0)
+  set(SEAL_REPO_URL https://github.com/WeiDaiWD/SEAL.git)
+  set(SEAL_GIT_TAG fix-hexl)
 
   set(SEAL_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fvisibility=hidden -fvisibility-inlines-hidden")
 
